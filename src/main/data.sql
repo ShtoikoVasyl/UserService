@@ -1,0 +1,93 @@
+-- -- Вставка трьох типів валют
+-- INSERT INTO currency (currency_id, code, full_name) VALUES
+--                                                         (1, 'USD', 'United States Dollar'),
+--                                                         (2, 'EUR', 'Euro'),
+--                                                         (3, 'GBP', 'British Pound Sterling');
+--
+-- -- Вставка трьох ролей
+-- INSERT INTO roles (role_id, name) VALUES
+--                                       (1, 'Admin'),
+--                                       (2, 'User'),
+--                                       (3, 'Guest');
+--
+-- -- Вставка пʼяти користувачів
+-- INSERT INTO users (user_id, first_name, last_name, email, password) VALUES
+--                                                                         (1, 'John', 'Doe', 'john.doe@example.com', 'hashed_password_1'),
+--                                                                         (2, 'Jane', 'Doe', 'jane.doe@example.com', 'hashed_password_2'),
+--                                                                         (3, 'Alice', 'Smith', 'alice.smith@example.com', 'hashed_password_3'),
+--                                                                         (4, 'Bob', 'Johnson', 'bob.johnson@example.com', 'hashed_password_4'),
+--                                                                         (5, 'Eva', 'Williams', 'eva.williams@example.com', 'hashed_password_5');
+--
+-- -- Вставка по пʼять акаунтів для кожного користувача
+-- INSERT INTO accounts (account_id, owner_id, account_name, currency_id, amount, status) VALUES
+--                                                                                            -- Для користувача 1
+--                                                                                            (1, 1, 'Primary', 1, 100000, 'OK'),
+--                                                                                            (2, 1, 'Savings', 2, 50000, 'OK'),
+--                                                                                            (3, 1, 'Investment', 3, 20000, 'OK'),
+--                                                                                            (4, 1, 'Credit Card', 1, -5000, 'OK'),
+--                                                                                            (5, 1, 'Loan', 2, -10000, 'OK'),
+--
+--                                                                                            -- Для користувача 2
+--                                                                                            (6, 2, 'Primary', 1, 75000, 'OK'),
+--                                                                                            (7, 2, 'Savings', 2, 30000, 'OK'),
+--                                                                                            (8, 2, 'Investment', 3, 15000, 'OK'),
+--                                                                                            (9, 2, 'Credit Card', 1, -3000, 'OK'),
+--                                                                                            (10, 2, 'Loan', 2, -7000, 'OK'),
+--
+--                                                                                            -- Для користувача 3
+--                                                                                            (11, 3, 'Primary', 1, 120000, 'OK'),
+--                                                                                            (12, 3, 'Savings', 2, 40000, 'OK'),
+--                                                                                            (13, 3, 'Investment', 3, 25000, 'OK'),
+--                                                                                            (14, 3, 'Credit Card', 1, -6000, 'OK'),
+--                                                                                            (15, 3, 'Loan', 2, -12000, 'OK'),
+--
+--                                                                                            -- Для користувача 4
+--                                                                                            (16, 4, 'Primary', 1, 50000, 'OK'),
+--                                                                                            (17, 4, 'Savings', 2, 20000, 'OK'),
+--                                                                                            (18, 4, 'Investment', 3, 10000, 'OK'),
+--                                                                                            (19, 4, 'Credit Card', 1, -2000, 'OK'),
+--                                                                                            (20, 4, 'Loan', 2, -5000, 'OK'),
+--
+--                                                                                            -- Для користувача 5
+--                                                                                            (21, 5, 'Primary', 1, 90000, 'OK'),
+--                                                                                            (22, 5, 'Savings', 2, 35000, 'OK'),
+--                                                                                            (23, 5, 'Investment', 3, 18000, 'OK'),
+--                                                                                            (24, 5, 'Credit Card', 1, -4000, 'OK'),
+--                                                                                            (25, 5, 'Loan', 2, -8000, 'OK');
+--
+-- -- Вставка по пʼять трансакцій для кожного акаунту
+-- INSERT INTO transactions (transaction_id, date_time, received_transaction_id, sent_transaction_id, amount, description, status) VALUES
+--                                                                                                                                     -- Для акаунту 1
+--                                                                                                                                     (1, '2023-10-27 12:00:00', NULL, NULL, 5000, 'Deposit', 'Completed'),
+--                                                                                                                                     (2, '2023-10-28 14:30:00', NULL, 4, 2000, 'Purchase', 'Completed'),
+--                                                                                                                                     (3, '2023-10-30 09:45:00', NULL, 2, 10000, 'Transfer', 'Completed'),
+--                                                                                                                                     (4, '2023-11-01 16:20:00', 2, NULL, 3000, 'Payment', 'Completed'),
+--                                                                                                                                     (5, '2023-11-03 11:10:00', NULL, 3, 8000, 'Withdrawal', 'Completed'),
+--
+--                                                                                                                                     -- Для акаунту 6
+--                                                                                                                                     (6, '2023-10-27 13:30:00', NULL, NULL, 7000, 'Deposit', 'Completed'),
+--                                                                                                                                     (7, '2023-10-29 10:15:00', NULL, 9, 1500, 'Purchase', 'Completed'),
+--                                                                                                                                     (8, '2023-10-31 08:00:00', NULL, 7, 8000, 'Transfer', 'Completed'),
+--                                                                                                                                     (9, '2023-11-02 14:45:00', 8, NULL, 2000, 'Payment', 'Completed'),
+--                                                                                                                                     (10, '2023-11-04 12:30:00', NULL, 8, 5000, 'Withdrawal', 'Completed'),
+--
+--                                                                                                                                     -- Для акаунту 11
+--                                                                                                                                     (11, '2023-10-28 15:45:00', NULL, NULL, 8000, 'Deposit', 'Completed'),
+--                                                                                                                                     (12, '2023-10-30 11:30:00', NULL, 12, 2500, 'Purchase', 'Completed'),
+--                                                                                                                                     (13, '2023-11-01 09:20:00', NULL, 14, 6000, 'Transfer', 'Completed'),
+--                                                                                                                                     (14, '2023-11-03 16:00:00', 13, NULL, 3500, 'Payment', 'Completed'),
+--                                                                                                                                     (15, '2023-11-05 10:45:00', NULL, 14, 7000, 'Withdrawal', 'Completed'),
+--
+--                                                                                                                                     -- Для акаунту 16
+--                                                                                                                                     (16, '2023-10-29 14:00:00', NULL, NULL, 4000, 'Deposit', 'Completed'),
+--                                                                                                                                     (17, '2023-10-31 12:45:00', NULL, 18, 1200, 'Purchase', 'Completed'),
+--                                                                                                                                     (18, '2023-11-02 09:30:00', NULL, 16, 5000, 'Transfer', 'Completed'),
+--                                                                                                                                     (19, '2023-11-04 15:15:00', 18, NULL, 1800, 'Payment', 'Completed'),
+--                                                                                                                                     (20, '2023-11-06 11:00:00', NULL, 19, 3000, 'Withdrawal', 'Completed'),
+--
+--                                                                                                                                     -- Для акаунту 21
+--                                                                                                                                     (21, '2023-10-30 16:15:00', NULL, NULL, 6000, 'Deposit', 'Completed'),
+--                                                                                                                                     (22, '2023-11-01 13:00:00', NULL, 23, 1700, 'Purchase', 'Completed'),
+--                                                                                                                                     (23, '2023-11-03 10:45:00', NULL, 21, 4500, 'Transfer', 'Completed'),
+--                                                                                                                                     (24, '2023-11-05 16:30:00', 22, NULL, 2300, 'Payment', 'Completed'),
+--                                                                                                                                     (25, '2023-11-07 12:15:00', NULL, 23, 6000, 'Withdrawal', 'Completed');
