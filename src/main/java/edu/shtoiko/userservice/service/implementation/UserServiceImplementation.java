@@ -12,11 +12,13 @@ import edu.shtoiko.userservice.service.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserServiceImplementation implements UserService {
@@ -26,7 +28,7 @@ public class UserServiceImplementation implements UserService {
     final RoleRepository roleRepository;
 
     public UserDto getUserDtoById(long userId) {
-        return modelMapper.map(userRepository.findById(userId), UserDto.class);
+        return modelMapper.map(readById(userId), UserDto.class);
     }
 
     @Override
@@ -39,22 +41,28 @@ public class UserServiceImplementation implements UserService {
         User user = modelMapper.map(userRequest, User.class);
         user.setUserStatus(UserStatus.ACTIVE);
         user.setRole(new Role(1L, "User"));
-        return modelMapper.map(userRepository.save(user), UserDto.class);
+        user = userRepository.save(user);
+        log.info("New user created, id={}", user.getId());
+        return modelMapper.map(user, UserDto.class);
     }
 
     @Override
     @Transactional
-    public UserDto update(UserDto userDto) {
-        User user = userRepository.findById(userDto.getId()).orElseThrow(() -> new EntityNotFoundException("User with Id=" + userDto.getId() + " not found"));
-        return modelMapper.map(userRepository.save(user), UserDto.class);
+    public UserDto archiveUser(UserDto userDto) {
+        User user = readById(userDto.getId());
+        user = userRepository.save(user);
+        log.info("User updated, id={}", user.getId());
+        return modelMapper.map(user, UserDto.class);
     }
 
     @Override
     @Transactional
-    public User update(long userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User with Id=" + userId + " not found"));
+    public User archiveUser(long userId) {
+        User user = readById(userId);
         user.setUserStatus(UserStatus.ARCHIVED);
-        return userRepository.save(user);
+        user = userRepository.save(user);
+        log.info("User archived, id={}", userId);
+        return user;
     }
 
     @Override
