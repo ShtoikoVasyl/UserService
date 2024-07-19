@@ -29,7 +29,6 @@ public class UserController {
         if(newUser == null){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-
         return new ResponseEntity<>(userService.create(newUser), HttpStatus.CREATED);
     }
 
@@ -43,21 +42,14 @@ public class UserController {
         return userService.getUserResponseById(userId);
     }
 
-    @PutMapping("/{id}/")
-    public UserDto updateUserById(@PathVariable long id, @RequestBody UserDto userDto) {
-        userDto.setId(id);
-        return userService.update(userDto);
+    @PutMapping("")
+    public UserDto updateUserById(@RequestBody UserDto userDto) {
+        return userService.archiveUser(userDto);
     }
 
     @DeleteMapping("/{id}/")
     public ResponseEntity<Long> delete(@PathVariable Long id) {
-        try {
-            User user = userService.readById(id);
-            user.setUserStatus(UserStatus.ARCHIVED);
-            userService.update(id);
+            userService.archiveUser(id);
             return new ResponseEntity<>(HttpStatus.OK);
-        } catch (Exception e) {
-        return new ResponseEntity<>(id, HttpStatus.NOT_FOUND);
-        }
     }
 }
