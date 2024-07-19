@@ -1,19 +1,18 @@
 package edu.shtoiko.userservice.model.Dto;
 
-import edu.shtoiko.userservice.model.entity.User;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
+import java.util.List;
 
 @Data
+@NoArgsConstructor
 public class UserResponse {
     private long id;
     private String firstName;
     private String lastName;
     private String email;
-
-    public UserResponse(User user){
-        this.id = user.getId();
-        this.firstName = user.getFirstName();
-        this.lastName = user.getLastName();
-        this.email = user.getEmail();
-    }
+    private List<AccountVo> accounts;
 }
