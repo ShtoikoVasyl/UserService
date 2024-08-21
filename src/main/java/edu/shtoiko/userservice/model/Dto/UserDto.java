@@ -19,10 +19,15 @@ public class UserDto {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
         UserDto userDto = (UserDto) o;
-        return Objects.equals(id, userDto.id) && Objects.equals(firstName, userDto.firstName) && Objects.equals(lastName, userDto.lastName) && Objects.equals(email, userDto.email) && Objects.equals(password, userDto.password) && Objects.equals(newPassword, userDto.newPassword) && Objects.equals(roleId, userDto.roleId);
+        return Objects.equals(id, userDto.id) && Objects.equals(firstName, userDto.firstName)
+            && Objects.equals(lastName, userDto.lastName) && Objects.equals(email, userDto.email)
+            && Objects.equals(password, userDto.password) && Objects.equals(newPassword, userDto.newPassword)
+            && Objects.equals(roleId, userDto.roleId);
     }
 
     @Override

@@ -37,7 +37,8 @@ public class UserToResponseConverter implements Converter<User, UserResponse> {
         userResponse.setLastName(user.getLastName());
 
         try {
-            List<AccountVo> accounts = List.of(restTemplate.getForObject(address + userResponse.getId() + "/", AccountVo[].class));
+            List<AccountVo> accounts =
+                List.of(restTemplate.getForObject(address + userResponse.getId() + "/", AccountVo[].class));
             userResponse.setAccounts(accounts);
         } catch (RestClientException e) {
             log.error("Failed to retrieve accounts for userId={} : {}", userResponse.getId(), e.getMessage());
