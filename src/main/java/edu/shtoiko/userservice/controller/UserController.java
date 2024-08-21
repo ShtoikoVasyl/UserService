@@ -25,20 +25,20 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDto> create(@RequestBody CreateRequestUserDto newUser){
-        if(newUser == null){
+    public ResponseEntity<UserDto> create(@RequestBody CreateRequestUserDto newUser) {
+        if (newUser == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(userService.create(newUser), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}/")
-    public UserDto read(@PathVariable("id") long userId){
+    public UserDto read(@PathVariable("id") long userId) {
         return userService.getUserDtoById(userId);
     }
 
     @GetMapping("/user/{id}/")
-    public UserResponse getUserVoById(@PathVariable("id") long userId){
+    public UserResponse getUserVoById(@PathVariable("id") long userId) {
         return userService.getUserResponseById(userId);
     }
 
@@ -49,7 +49,7 @@ public class UserController {
 
     @DeleteMapping("/{id}/")
     public ResponseEntity<Long> delete(@PathVariable Long id) {
-            userService.archiveUser(id);
-            return new ResponseEntity<>(HttpStatus.OK);
+        userService.archiveUser(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -1,6 +1,5 @@
 package edu.shtoiko.userservice.model.entity;
 
-
 import edu.shtoiko.userservice.model.enums.UserStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -50,11 +49,11 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "userId=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", secondName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+            "userId=" + id +
+            ", firstName='" + firstName + '\'' +
+            ", secondName='" + lastName + '\'' +
+            ", email='" + email + '\'' +
+            ", password='" + password + '\'' +
+            '}';
     }
 }
