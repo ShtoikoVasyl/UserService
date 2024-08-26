@@ -5,4 +5,18 @@ spring:
     active: dev
   cloud:
     config:
-      uri: http://localhost:8070
+      discovery:
+        enabled: true
+      name: userservice
+      fail-fast: true
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8008/eureka
+
+logging:
+  level:
+    org.springframework.cloud.netflix.eureka: DEBUG
+    org.springframework.cloud.config: DEBUG
+    org.springframework.web.client.RestTemplate: DEBUG
+    org.springframework.http.client: DEBUG
