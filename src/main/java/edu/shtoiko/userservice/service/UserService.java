@@ -1,26 +1,28 @@
 package edu.shtoiko.userservice.service;
 
-import edu.shtoiko.userservice.model.Dto.CreateRequestUserDto;
-import edu.shtoiko.userservice.model.Dto.UserDto;
-import edu.shtoiko.userservice.model.Dto.UserResponse;
+import edu.shtoiko.userservice.model.Dto.*;
 import edu.shtoiko.userservice.model.entity.User;
 
 import java.util.List;
 
 public interface UserService {
-    public UserDto getUserDtoById(long userId);
+    public UserVo getUserDtoById(long userId);
 
-    User readById(long id);
+    User readUserById(long id);
 
-    UserDto create(CreateRequestUserDto user);
+    UserResponse create(CreateRequestUserDto user);
 
-    UserDto archiveUser(UserDto user);
-
-    User archiveUser(long userId);
+    UserVo archiveUser(Long userId);
 
     void delete(long id);
 
     List<User> getAll();
 
     UserResponse getUserResponseById(long userId);
+
+    UserResponse updateUser(UserUpdateRequest userDto);
+
+    UserResponse getUserResponseByEmail(String email);
+
+    UserVo getUserVoById(Long id);
 }
