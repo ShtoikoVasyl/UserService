@@ -1,50 +1,37 @@
 package edu.shtoiko.userservice.model.mapper;
 
+import edu.shtoiko.userservice.client.AccountClient;
 import edu.shtoiko.userservice.model.Dto.AccountVo;
-import edu.shtoiko.userservice.model.Dto.UserResponse;
+import edu.shtoiko.userservice.model.Dto.UserVo;
 import edu.shtoiko.userservice.model.entity.User;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.Converter;
 import org.modelmapper.spi.MappingContext;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.Collections;
 import java.util.List;
 
 @Slf4j
 @Component
-public class UserToResponseConverter implements Converter<User, UserResponse> {
+@RequiredArgsConstructor
+public class UserToResponseConverter implements Converter<User, UserVo> {
 
-    private final RestTemplate restTemplate;
-
-    @Value("${accountService.address}")
-    private String address;
-
-    public UserToResponseConverter(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
+    private final AccountClient accountClient;
 
     @Override
-    public UserResponse convert(MappingContext<User, UserResponse> context) {
+    public UserVo convert(MappingContext<User, UserVo> context) {
         User user = context.getSource();
-        UserResponse userResponse = new UserResponse();
-        userResponse.setId(user.getId());
-        userResponse.setEmail(user.getEmail());
-        userResponse.setFirstName(user.getFirstName());
-        userResponse.setLastName(user.getLastName());
+        UserVo userVo = new UserVo();
+        userVo.setId(user.getId());
+        userVo.setEmail(user.getEmail());
+        userVo.setFirstName(user.getFirstName());
+        userVo.setLastName(user.getLastName());
+        userVo.setAccounts(getAccountsByUserId(user.getId()));
+        return userVo;
+    }
 
-        try {
-            List<AccountVo> accounts =
-                List.of(restTemplate.getForObject(address + userResponse.getId() + "/", AccountVo[].class));
-            userResponse.setAccounts(accounts);
-        } catch (RestClientException e) {
-            log.error("Failed to retrieve accounts for userId={} : {}", userResponse.getId(), e.getMessage());
-            userResponse.setAccounts(Collections.emptyList());
-        }
-
-        return userResponse;
+    private List<AccountVo> getAccountsByUserId(Long userId) {
+        return accountClient.getAccountsByUserId(userId);
     }
 }

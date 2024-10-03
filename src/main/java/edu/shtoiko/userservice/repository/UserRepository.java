@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+
+    User findByEmail(String email);
 //    @Query("SELECT DISTINCT NEW edu.shtoiko.userservice.model.Dto.UserDto(u) FROM User u LEFT JOIN FETCH u.role WHERE u.id = :id")
 //    UserDto findUserDtoByUserId(@Param("id") long id);
 }

@@ -2,12 +2,15 @@ package edu.shtoiko.userservice.model.Dto;
 
 import jakarta.validation.constraints.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Objects;
 
-@Data
 @NoArgsConstructor
+@Getter
+@Setter
 public class UserDto {
     @Positive
     private Long id;
@@ -32,16 +35,6 @@ public class UserDto {
     @Pattern(regexp = ".*[@#$%^&+=].*", message = "Password must contain at least one special character (@#$%^&+=)")
     private String password;
 
-    @NotBlank(message = "Password cannot be empty")
-    @Size(min = 8, max = 20, message = "Password must be between 8 and 20 characters")
-    @Pattern(regexp = ".*\\d.*", message = "Password must contain at least one digit")
-    @Pattern(regexp = ".*[A-Z].*", message = "Password must contain at least one uppercase letter")
-    @Pattern(regexp = ".*[@#$%^&+=].*", message = "Password must contain at least one special character (@#$%^&+=)")
-    private String newPassword;
-
-    @NotNull
-    private Long roleId;
-
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -50,13 +43,11 @@ public class UserDto {
             return false;
         UserDto userDto = (UserDto) o;
         return Objects.equals(id, userDto.id) && Objects.equals(firstName, userDto.firstName)
-            && Objects.equals(lastName, userDto.lastName) && Objects.equals(email, userDto.email)
-            && Objects.equals(password, userDto.password) && Objects.equals(newPassword, userDto.newPassword)
-            && Objects.equals(roleId, userDto.roleId);
+            && Objects.equals(lastName, userDto.lastName) && Objects.equals(email, userDto.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, password, newPassword, roleId);
+        return Objects.hash(id, firstName, lastName, email, password);
     }
 }
