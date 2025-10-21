@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  flyway:
+    locations: classpath:db/migration-test
+jwt:
+  rest:
+    key: c18fc1c752ec287724257664d7139eeb01e341ed7302322e512adff41327c391ac33bd179aa73c52971422372f2f8cc633caf06f00f880647194d0682ec29dc43c46a21ea7d3b427262d212827da93affe1b6f94ba494f66d8c1850056bf6edf49a2e8388f14b3a6ed29bbb2c2bc9889da239a0a80c335c18537989df8aba9c72131682a2d23aa18071bf10070fc4f8dadde565d67379050b0a9a92481b3fc81d25cf2c29822ead65bc1953bcc58907f333890c6a416a8b6353566dd9db3cf426363cea4dd878fd474d887ae8b3d5d6e29333674378dedbd469715266f1f70e3f83eae7229e9fb96dc9ae303e04fae020b903bc548a7ef3bd4fd9f1c87085d12
+    expiration_time:
+      access: 360000
+      refresh: 86400000
+      cross_service: 150000
+logging:
+  level:
+    org.flywaydb: DEBUG
